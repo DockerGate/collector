@@ -394,7 +394,7 @@ func checkRepoList(initial bool) (updates bool) {
 
 func setupLogging() {
 	consoleLog := blog.NewConsoleLogWriter()
-	consoleLog = consoleLog.SetColor(true)
+	//consoleLog = consoleLog.SetColor(true)
 	blog.AddFilter("stdout", CONSOLELOGLEVEL, consoleLog)
 	if *fileLog == true {
 		f, e := os.OpenFile(LOGFILENAME, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
@@ -402,7 +402,7 @@ func setupLogging() {
 			except.Fail(e, ": Error in opening log file: ", LOGFILENAME)
 		}
 		f.Close()
-		flw := blog.NewFileLogWriter(LOGFILENAME)
+		flw := blog.NewFileLogWriter(LOGFILENAME,true)
 		blog.AddFilter("file", FILELOGLEVEL, flw)
 	}
 }
